@@ -1,3 +1,1 @@
 # gbot
-
-Another opening
