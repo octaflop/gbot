@@ -5,18 +5,20 @@ from gidgethub.aiohttp import GitHubAPI
 
 
 async def main():
-    user = 'octaflop'
-    repo = 'gbot'
+    # user = 'octaflop'
+    # repo = 'gbot'
     # issue_id = 1
-    # user = 'mariatta'
-    # repo = 'strange-relationship'
-    # issue_id = 80
+    user = 'mariatta'
+    repo = 'strange-relationship'
+    issue_id = 80
     # await add_issue(user, repo)
     # await comment_on_issue(user, repo, issue_id)
-    # await react_issue(user, repo, issue_id)
+    reaction = 'hooray'
     # await close_issue(user, repo, issue_id)
     issues = await get_issues(user, repo)
-    print(issues)
+    for issue in issues:
+        await react_issue(user, repo, issue['number'], reaction)
+        print(issue['number'])
 
 
 async def add_issue(user, repo):
@@ -38,12 +40,12 @@ async def comment_on_issue(user, repo, issue_id):
                       })
 
 
-async def react_issue(user, repo, issue_id):
+async def react_issue(user, repo, issue_id, reaction='heart'):
     async with aiohttp.ClientSession() as session:
         gh = GitHubAPI(session, "octaflop", oauth_token=os.getenv("GH_AUTH"))
         await gh.post(f'/repos/{user}/{repo}/issues/{issue_id}/reactions',
                       data={
-                          'content': 'heart',
+                          'content': reaction,
                       },
                       accept='application/vnd.github.squirrel-girl-preview+json')
 
