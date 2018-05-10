@@ -5,20 +5,20 @@ from gidgethub.aiohttp import GitHubAPI
 
 
 async def main():
-    # user = 'octaflop'
-    # repo = 'gbot'
+    user = 'octaflop'
+    repo = 'gbot'
     # issue_id = 1
-    user = 'mariatta'
-    repo = 'strange-relationship'
-    issue_id = 80
-    # await add_issue(user, repo)
+    # user = 'mariatta'
+    # repo = 'strange-relationship'
+    # issue_id = 80
+    await add_issue(user, repo)
     # await comment_on_issue(user, repo, issue_id)
-    reaction = 'hooray'
+    # reaction = 'hooray'
     # await close_issue(user, repo, issue_id)
-    issues = await get_issues(user, repo)
-    for issue in issues:
-        await react_issue(user, repo, issue['number'], reaction)
-        print(issue['number'])
+    # issues = await get_issues(user, repo)
+    # for issue in issues:
+    #     await react_issue(user, repo, issue['number'], reaction)
+    #     print(issue['number'])
 
 
 async def add_issue(user, repo):
